@@ -1008,11 +1008,14 @@ header.major:after {
 }
 header.major h2, header.major h3 {
   margin: 0 0 1.2em 0;
+  font-size: 30em;
+ 
 }
 header.major p {
   margin: 0 0 1.5em 0;
   position: relative;
   top: -1em;
+  font-size: 26em;
 }
 
 /* Forms */
@@ -1701,7 +1704,7 @@ ol.default li {
     backface-visibility: hidden;
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)), url("../img/bg02.png");
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)), url("../img/bg02.png");
-    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)), url("../img/bg02.png");
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)), url("../img/bg01.png");
     background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)), url("../img/bg02.png");
     -moz-transition: -moz-transform 0.5s ease;
     -webkit-transition: -webkit-transform 0.5s ease;

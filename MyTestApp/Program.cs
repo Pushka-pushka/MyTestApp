@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using MyTestApp.Domain;
 using MyTestApp.infrastucture;
 
 namespace MyTestApp
@@ -22,7 +26,35 @@ namespace MyTestApp
             AppConfig config = configuration.GetSection("Project").Get<AppConfig>()!;
 
 
+            //подключение контекста базы данных
+            builder.Services.AddDbContext<AppDbContext>(x=>x.UseSqlServer(config.DataBase.ConnectionString)
+            //подавляем предупреждение об ошибке
+            .ConfigureWarnings(warnings=>warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
+             
+            //настраиваем edintity систему
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            // настраиваем auth cooke
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "myCompanyAuth";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.LoginPath = "/admin/login";
+                options.AccessDeniedPath = "/admin/accessdenied";
+                options.SlidingExpiration = true;
+            });
+
+            
             // подключаем функционал контроллеров 
             builder.Services.AddControllersWithViews();
 
