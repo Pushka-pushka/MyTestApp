@@ -70,6 +70,8 @@ namespace MyTestApp
             //подключаем систему маршрутизации
             app.UseRouting();
 
+            // подключение авторизации и аутентификацию
+
             //регистрируем нужные маршуты
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
