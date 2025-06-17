@@ -13,6 +13,6 @@ namespace MyTestApp.Domain.Entities
         [MaxLength(200)]
         public string? Title {  get; set; }
 
-        public DateTime DataCreated { get; set; } = DateTime.UtcNow; //+3
+        public DateTime DataCreated { get; set; } = DateTime.UtcNow; //+3 ЧАСА
     }
 }

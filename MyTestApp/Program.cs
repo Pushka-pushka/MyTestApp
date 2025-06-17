@@ -37,10 +37,10 @@ namespace MyTestApp
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireNonAlphanumeric = false; //использование символов в пароле
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequireDigit = false;
+                options.Password.RequireDigit = false; //использзование цифр в пароле
 
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
@@ -49,7 +49,7 @@ namespace MyTestApp
             {
                 options.Cookie.Name = "myCompanyAuth";
                 options.Cookie.HttpOnly = true;
-                options.Cookie.LoginPath = "/admin/login";
+                options.LoginPath = "/admin/login";
                 options.AccessDeniedPath = "/admin/accessdenied";
                 options.SlidingExpiration = true;
             });
@@ -71,6 +71,9 @@ namespace MyTestApp
             app.UseRouting();
 
             // подключение авторизации и аутентификацию
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             //регистрируем нужные маршуты
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
