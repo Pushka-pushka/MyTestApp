@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MyTestApp.Domain;
+using MyTestApp.Domain.Repositories.Abstract;
+using MyTestApp.Domain.Repositories.EntityFreamwork;
 using MyTestApp.infrastucture;
 
 namespace MyTestApp
@@ -31,7 +33,10 @@ namespace MyTestApp
             //подавляем предупреждение об ошибке
             .ConfigureWarnings(warnings=>warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
              
-            //настраиваем edintity систему
+            builder.Services.AddTransient<IServiceCategoriesRepository, EFServiceCategoryRepository>();
+            builder.Services.AddTransient<IServicesRepository, EFServicesRepository>();
+            builder.Services.AddTransient<DataManager>();
+            //настраиваем Identity систему
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
